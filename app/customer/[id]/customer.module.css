@@ -1,0 +1,25 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .customerInfo {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  
+  .customerInfo h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .customerInfo p {
+    margin-bottom: 0.5rem;
+  }
