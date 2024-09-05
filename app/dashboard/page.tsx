@@ -94,7 +94,7 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      <h1 className="text-3xl font-semibold mb-6">Dashboard</h1>
+      <h1 className="text-3xl font-semibold mb-6 text-gray-900">Dashboard</h1>
       
       <OverviewStats stats={stats} />
 
