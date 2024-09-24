@@ -10,11 +10,19 @@ import RightColumn from '../components/dashboard/RightColumn';
 // Mock data interfaces
 interface OverviewStats {
   totalAUM: number;
-  investment: number;
-  cash: number;
   clientCount: number;
   avgPortfolioValue: number;
   ytdPerformance: number;
+  aumBreakdown: {
+    investment: number;
+    cash: number;
+  };
+  clientBreakdown: {
+    premier: number;
+    premierElite: number;
+  };
+  historicalPortfolioValues: { date: string; value: number }[];
+  historicalYTDPerformance: { date: string; value: number }[];
 }
 
 interface Client {
@@ -60,11 +68,35 @@ export default function Dashboard() {
     // TODO: Replace with actual API calls
     setStats({
       totalAUM: 1000000000,
-      investment: 850000000,
-      cash: 150000000,
       clientCount: 50,
       avgPortfolioValue: 20000000,
-      ytdPerformance: 7.5
+      ytdPerformance: 7.5,
+      aumBreakdown: {
+        investment: 85,
+        cash: 15,
+      },
+      clientBreakdown: {
+        premier: 43,
+        premierElite: 7,
+      },
+      historicalPortfolioValues: [
+        { date: '2024-01-01', value: 19000000 },
+        { date: '2024-02-01', value: 20000000 },
+        { date: '2024-03-01', value: 21000000 },
+        { date: '2024-04-01', value: 22000000 },
+        { date: '2024-05-01', value: 23000000 },
+        { date: '2024-06-01', value: 24000000 },
+        { date: '2024-07-01', value: 25000000 },
+        { date: '2024-08-01', value: 26000000 },
+        { date: '2024-09-01', value: 27000000 },
+      ],
+      historicalYTDPerformance: [
+        { date: '2024-01-01', value: 7.5 },
+        { date: '2024-09-01', value: 7.5 },
+        { date: '2024-10-01', value: 8.0 },
+        { date: '2024-11-01', value: 8.2 },
+        { date: '2024-12-01', value: 8.5 },
+      ],
     });
     setTopClients([
       { id: 1, name: 'John Doe', portfolioValue: 50000000, recentChange: 2.3 },
@@ -90,11 +122,11 @@ export default function Dashboard() {
     ]);
   }, []);
 
-  if (!stats) return <div className="w-screen h-screen flex items-center justify-center">Loading...</div>;
+  if (!stats) return <div className="w-screen h-screen flex items-center justify-center text-gray-700">Loading...</div>;
 
   return (
     <Layout>
-      <h1 className="text-3xl font-semibold mb-6 text-gray-900">Dashboard</h1>
+      <h1 className="text-4xl font-semibold mb-8 text-gray-900">Dashboard</h1>
       
       <OverviewStats stats={stats} />
 
