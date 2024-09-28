@@ -15,6 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [endDate, setEndDate] = useState('');
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
   const [startDateRange, endDateRange] = dateRange;
+  const [activeTab, setActiveTab] = useState('Overview');
 
   useEffect(() => {
     setMounted(true);
@@ -41,6 +42,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }
     return '';
   };
+
+  const tabs = ['Overview', 'Analytics', 'Reports', 'Notifications'];
 
   return (
     <div className="flex flex-col h-screen bg-white">
@@ -129,6 +132,26 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </button>
             </div>
           </div>
+          
+          {/* New Tab Button Row with enhanced shadows */}
+          <div className="mb-6">
+            <div className="inline-flex bg-gray-200 rounded-lg p-1 shadow-md">
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                    activeTab === tab
+                      ? 'bg-white text-black shadow-sm'
+                      : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+                  }`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {children}
         </div>
       </div>

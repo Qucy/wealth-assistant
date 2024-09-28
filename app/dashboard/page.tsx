@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import OverviewStats from '../components/dashboard/OverviewStats';
 import LeftColumn from '../components/dashboard/LeftColumn';
-import MiddleColumn from '../components/dashboard/MiddleColumn';
 import RightColumn from '../components/dashboard/RightColumn';
 
 // Mock data interfaces
@@ -55,6 +54,28 @@ interface Alert {
   type: 'compliance' | 'risk';
   message: string;
 }
+
+// Dummy data for monthlyData
+const monthlyData = [
+  { month: 'Jan', gain: 50000, loss: 20000 },
+  { month: 'Feb', gain: 55000, loss: 18000 },
+  { month: 'Mar', gain: 60000, loss: 22000 },
+  { month: 'Apr', gain: 58000, loss: 21000 },
+  { month: 'May', gain: 62000, loss: 19000 },
+  { month: 'Jun', gain: 65000, loss: 23000 },
+  { month: 'Jul', gain: 68000, loss: 24000 },
+  { month: 'Aug', gain: 70000, loss: 22000 },
+  { month: 'Sep', gain: 72000, loss: 25000 },
+];
+
+// Dummy data for recentSales
+const recentSales = [
+  { id: 1, customerAvatar: 'https://i.pravatar.cc/40?img=1', customerName: 'John Doe', customerEmail: 'john@example.com', amount: 1500.00 },
+  { id: 2, customerAvatar: 'https://i.pravatar.cc/40?img=2', customerName: 'Jane Smith', customerEmail: 'jane@example.com', amount: 2750.50 },
+  { id: 3, customerAvatar: 'https://i.pravatar.cc/40?img=3', customerName: 'Bob Johnson', customerEmail: 'bob@example.com', amount: -500.25 },
+  { id: 4, customerAvatar: 'https://i.pravatar.cc/40?img=4', customerName: 'Alice Brown', customerEmail: 'alice@example.com', amount: 3200.75 },
+  { id: 5, customerAvatar: 'https://i.pravatar.cc/40?img=5', customerName: 'Charlie Wilson', customerEmail: 'charlie@example.com', amount: 1800.00 },
+];
 
 export default function Dashboard() {
   const [stats, setStats] = useState<OverviewStats | null>(null);
@@ -128,10 +149,13 @@ export default function Dashboard() {
     <Layout>
       <OverviewStats stats={stats} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <LeftColumn topClients={topClients} tasks={tasks} />
-        <MiddleColumn recentActivities={recentActivities} marketInsights={marketInsights} />
-        <RightColumn alerts={alerts} />
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="lg:col-span-2">
+          <LeftColumn monthlyData={monthlyData} />
+        </div>
+        <div className="lg:col-span-2">
+          <RightColumn recentSales={recentSales} />
+        </div>
       </div>
     </Layout>
   );

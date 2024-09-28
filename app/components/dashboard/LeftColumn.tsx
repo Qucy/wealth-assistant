@@ -1,52 +1,55 @@
-import Link from 'next/link';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
-interface Client {
-  id: number;
-  name: string;
-  portfolioValue: number;
-  recentChange: number;
-}
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-interface Task {
-  id: number;
-  title: string;
-  dueDate: string;
+interface MonthlyData {
+  month: string;
+  gain: number;
+  loss: number;
 }
 
 interface LeftColumnProps {
-  topClients: Client[];
-  tasks: Task[];
+  monthlyData: MonthlyData[];
 }
 
-export default function LeftColumn({ topClients, tasks }: LeftColumnProps) {
-  return (
-    <div className="lg:col-span-1">
-      <section className="bg-white p-6 rounded-lg shadow mb-8">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800">Top Clients</h2>
-        <ul>
-          {topClients.map(client => (
-            <li key={client.id} className="flex justify-between py-3 border-b border-gray-200 last:border-b-0">
-              <Link href={`/client/${client.id}`} className="flex justify-between w-full text-gray-700">
-                <span>{client.name}</span>
-                <span className={client.recentChange >= 0 ? 'text-green-600' : 'text-red-600'}>
-                  ${client.portfolioValue.toLocaleString()} ({client.recentChange > 0 ? '+' : ''}{client.recentChange}%)
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+export default function LeftColumn({ monthlyData }: LeftColumnProps) {
+  const data = {
+    labels: monthlyData.map(item => item.month),
+    datasets: [
+      {
+        label: 'Gains',
+        data: monthlyData.map(item => item.gain),
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+      },
+      {
+        label: 'Losses',
+        data: monthlyData.map(item => item.loss),
+        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+      },
+    ],
+  };
 
-      <section className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800">Upcoming Tasks</h2>
-        <ul>
-          {tasks.map(task => (
-            <li key={task.id} className="flex justify-between py-3 border-b border-gray-200 last:border-b-0">
-              <span className="text-gray-700">{task.title}</span>
-              <span className="text-gray-500">{task.dueDate}</span>
-            </li>
-          ))}
-        </ul>
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true,
+      },
+    },
+  };
+
+  return (
+    <div className="lg:col-span-2">
+      <section className="bg-white p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 border border-gray-200">
+        <h2 className="text-xl font-semibold mb-4 text-gray-800">Total Gains and Losses (2024)</h2>
+        <div className="h-96">
+          <Bar data={data} options={options} />
+        </div>
       </section>
     </div>
   );
