@@ -5,6 +5,10 @@ import Layout from '../components/Layout';
 import OverviewStats from '../components/dashboard/OverviewStats';
 import LeftColumn from '../components/dashboard/LeftColumn';
 import RightColumn from '../components/dashboard/RightColumn';
+import DatePicker from 'react-datepicker';
+import { format } from 'date-fns';
+import "react-datepicker/dist/react-datepicker.css";
+import { FaCalendar, FaDownload } from 'react-icons/fa';
 
 // Mock data interfaces
 interface OverviewStats {
@@ -70,11 +74,11 @@ const monthlyData = [
 
 // Dummy data for recentSales
 const recentSales = [
-  { id: 1, customerAvatar: 'https://i.pravatar.cc/40?img=1', customerName: 'John Doe', customerEmail: 'john@example.com', amount: 1500.00 },
-  { id: 2, customerAvatar: 'https://i.pravatar.cc/40?img=2', customerName: 'Jane Smith', customerEmail: 'jane@example.com', amount: 2750.50 },
-  { id: 3, customerAvatar: 'https://i.pravatar.cc/40?img=3', customerName: 'Bob Johnson', customerEmail: 'bob@example.com', amount: -500.25 },
-  { id: 4, customerAvatar: 'https://i.pravatar.cc/40?img=4', customerName: 'Alice Brown', customerEmail: 'alice@example.com', amount: 3200.75 },
-  { id: 5, customerAvatar: 'https://i.pravatar.cc/40?img=5', customerName: 'Charlie Wilson', customerEmail: 'charlie@example.com', amount: 1800.00 },
+  { id: 1, customerAvatar: 'https://i.pravatar.cc/40?img=1', customerName: 'John Doe', customerEmail: 'john@example.com', amount: 1500.00, gender: 'male' },
+  { id: 2, customerAvatar: 'https://i.pravatar.cc/40?img=2', customerName: 'Jane Smith', customerEmail: 'jane@example.com', amount: 2750.50, gender: 'female' },
+  { id: 3, customerAvatar: 'https://i.pravatar.cc/40?img=3', customerName: 'Bob Johnson', customerEmail: 'bob@example.com', amount: -500.25, gender: 'male' },
+  { id: 4, customerAvatar: 'https://i.pravatar.cc/40?img=4', customerName: 'Alice Brown', customerEmail: 'alice@example.com', amount: 3200.75, gender: 'female' },
+  { id: 5, customerAvatar: 'https://i.pravatar.cc/40?img=5', customerName: 'Charlie Wilson', customerEmail: 'charlie@example.com', amount: 1800.00, gender: 'male' },
 ];
 
 export default function Dashboard() {
@@ -84,6 +88,22 @@ export default function Dashboard() {
   const [recentActivities, setRecentActivities] = useState<Activity[]>([]);
   const [marketInsights, setMarketInsights] = useState<MarketInsight[]>([]);
   const [alerts, setAlerts] = useState<Alert[]>([]);
+
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
+  const [startDateRange, endDateRange] = dateRange;
+  const [activeTab, setActiveTab] = useState('Overview');
+
+  const formatDateRange = (start: Date | null, end: Date | null) => {
+    if (start && end) {
+      return `${format(start, 'MMM dd, yyyy')} - ${format(end, 'MMM dd, yyyy')}`;
+    }
+    return '';
+  };
+
+  const tabs = ['Overview', 'Analytics', 'Reports', 'Notifications'];
+
 
   useEffect(() => {
     // TODO: Replace with actual API calls
@@ -147,6 +167,64 @@ export default function Dashboard() {
 
   return (
     <Layout>
+
+      {/* Dashboard title and date range picker */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        {/* Add Dashboard title */}
+        <h1 className="text-2xl font-bold text-black">Dashboard</h1>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
+          <div className="relative w-full sm:w-[400px]">
+            <DatePicker
+              selectsRange={true}
+              startDate={startDateRange || new Date()}
+              endDate={endDateRange || new Date()}
+              onChange={(update: [Date | null, Date | null]) => {
+                setDateRange(update);
+              }}
+              dateFormat="MMM dd, yyyy"
+              className="!w-full border border-gray-300 rounded-md px-3 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-200 text-black"
+              placeholderText="Select date range"
+              isClearable={true}
+              customInput={
+                <input
+                  type="text"
+                  value={formatDateRange(startDateRange, endDateRange)}
+                  readOnly
+                  className="w-full cursor-pointer"
+                  style={{ width: '100%', maxWidth: '100%' }}
+                />
+              }
+              wrapperClassName="!w-full"
+            />
+            <FaCalendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          </div>
+          <button className="bg-black text-white px-4 py-2 rounded-md flex items-center whitespace-nowrap">
+            <FaDownload className="mr-2" />
+            Download
+          </button>
+        </div>
+      </div>
+
+      {/* New Tab Button Row with enhanced shadows */}
+      <div className="mb-6">
+        <div className="inline-flex bg-gray-200 rounded-lg p-1 shadow-md">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                activeTab === tab
+                  ? 'bg-white text-black shadow-sm'
+                  : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+              }`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+
       <OverviewStats stats={stats} />
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">

@@ -2,20 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaHome, FaTachometerAlt, FaAddressBook, FaCalendar, FaCog, FaSignOutAlt, FaUser, FaSearch, FaDownload } from 'react-icons/fa';
+import { FaHome, FaTachometerAlt, FaAddressBook, FaCalendar, FaCog, FaSignOutAlt, FaUser, FaSearch } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-import { format } from 'date-fns';
+
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
-  const [startDateRange, endDateRange] = dateRange;
-  const [activeTab, setActiveTab] = useState('Overview');
 
   useEffect(() => {
     setMounted(true);
@@ -24,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const menuItems = [
     { path: '/home', icon: FaHome, label: 'Home' },
     { path: '/dashboard', icon: FaTachometerAlt, label: 'Dashboard' },
-    { path: '/contacts', icon: FaAddressBook, label: 'Contacts' },
+    { path: '/contacts', icon: FaAddressBook, label: 'Cliens' },
     { path: '/calendar', icon: FaCalendar, label: 'Calendar' },
     { path: '/settings', icon: FaCog, label: 'Settings' },
   ];
@@ -35,15 +28,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   if (!mounted) {
     return null;
   }
-
-  const formatDateRange = (start: Date | null, end: Date | null) => {
-    if (start && end) {
-      return `${format(start, 'MMM dd, yyyy')} - ${format(end, 'MMM dd, yyyy')}`;
-    }
-    return '';
-  };
-
-  const tabs = ['Overview', 'Analytics', 'Reports', 'Notifications'];
 
   return (
     <div className="flex flex-col h-screen bg-white">
@@ -78,7 +62,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               ))}
             </nav>
           </div>
-          <div className="relative ml-4 w-64">
+          <div className="relative ml-4 w-90">
             <input
               type="text"
               placeholder="Search..."
@@ -97,61 +81,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <div className="flex-1 overflow-auto bg-white w-full">
         <div className="p-4 sm:p-6 md:p-8">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-            {/* Add Dashboard title */}
-            <h1 className="text-2xl font-bold text-black">Dashboard</h1>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
-              <div className="relative w-full sm:w-[400px]">
-                <DatePicker
-                  selectsRange={true}
-                  startDate={startDateRange || new Date()}
-                  endDate={endDateRange || new Date()}
-                  onChange={(update: [Date | null, Date | null]) => {
-                    setDateRange(update);
-                  }}
-                  dateFormat="MMM dd, yyyy"
-                  className="!w-full border border-gray-300 rounded-md px-3 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-200 text-black"
-                  placeholderText="Select date range"
-                  isClearable={true}
-                  customInput={
-                    <input
-                      type="text"
-                      value={formatDateRange(startDateRange, endDateRange)}
-                      readOnly
-                      className="w-full cursor-pointer"
-                      style={{ width: '100%', maxWidth: '100%' }}
-                    />
-                  }
-                  wrapperClassName="!w-full"
-                />
-                <FaCalendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              </div>
-              <button className="bg-black text-white px-4 py-2 rounded-md flex items-center whitespace-nowrap">
-                <FaDownload className="mr-2" />
-                Download
-              </button>
-            </div>
-          </div>
-          
-          {/* New Tab Button Row with enhanced shadows */}
-          <div className="mb-6">
-            <div className="inline-flex bg-gray-200 rounded-lg p-1 shadow-md">
-              {tabs.map((tab) => (
-                <button
-                  key={tab}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                    activeTab === tab
-                      ? 'bg-white text-black shadow-sm'
-                      : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
-                  }`}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {children}
         </div>
       </div>
