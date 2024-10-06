@@ -74,12 +74,262 @@ const monthlyData = [
 
 // Dummy data for recentSales
 const recentSales = [
-  { id: 1, customerAvatar: 'https://i.pravatar.cc/40?img=1', customerName: 'John Doe', customerEmail: 'john@example.com', amount: 1500.00, gender: 'male' },
-  { id: 2, customerAvatar: 'https://i.pravatar.cc/40?img=2', customerName: 'Jane Smith', customerEmail: 'jane@example.com', amount: 2750.50, gender: 'female' },
-  { id: 3, customerAvatar: 'https://i.pravatar.cc/40?img=3', customerName: 'Bob Johnson', customerEmail: 'bob@example.com', amount: -500.25, gender: 'male' },
-  { id: 4, customerAvatar: 'https://i.pravatar.cc/40?img=4', customerName: 'Alice Brown', customerEmail: 'alice@example.com', amount: 3200.75, gender: 'female' },
-  { id: 5, customerAvatar: 'https://i.pravatar.cc/40?img=5', customerName: 'Charlie Wilson', customerEmail: 'charlie@example.com', amount: 1800.00, gender: 'male' },
-];
+  {
+    id: 1,
+    customerName: 'John Doe',
+    customerEmail: 'john@example.com',
+    phone: '+1 (555) 123-4567',
+    investmentPreference: 'Moderate',
+    riskTolerance: 'Medium',
+    gender: 'male',
+    customerAvatar: '/avatars/1.jpg',
+    age: 25,
+    jobTitle: 'Software Engineer',
+    maritalStatus: 'Single',
+    annualIncome: 120000,
+    education: 'Bachelor\'s Degree',
+    interests: ['Technology', 'Travel'],
+    netWorth: 2000000,
+    assets: { stocks: 800000, bonds: 500000, realEstate: 700000, cash: 180000, deposit: 180000 },
+    liabilities: { mortgage: 400000, carLoan: 20000 },
+    accountBalance: 180000,
+    realisticGainLoss: 10000,
+    unrealisticGainLoss: 15000,
+    realisticGainLossPercentage: 5,
+    unrealisticGainLossPercentage: 7.5,
+    recentTransactions: [
+      { date: '2024-05-15', description: 'Stock Purchase', amount: 5000 },
+      { date: '2024-05-10', description: 'Dividend Payment', amount: 1200 }
+    ],
+    recentActivities: [
+      { date: '2024-09-02', description: 'Purchased 100 shares of Apple stock at $150 each', type: 'Investment' },
+      { date: '2024-09-04', description: 'Spent $500 on electronics at Best Buy using credit card', type: 'Normal Transaction' },
+      { date: '2024-09-06', description: 'Visited the bank branch for account inquiries', type: 'Normal Visit' },
+      { date: '2024-09-08', description: 'Bought 50 shares of Amazon stock at $2,000 each', type: 'Investment' },
+      { date: '2024-09-11', description: 'Made a $200 debit card transaction at a local restaurant', type: 'Normal Transaction' },
+      { date: '2024-09-13', description: 'Met with Relationship Manager to discuss investment strategies', type: 'Normal Visit' },
+      { date: '2024-09-15', description: 'Sold 20 bonds at $1,000 each', type: 'Investment' },
+      { date: '2024-09-17', description: 'Paid $1,500 credit card bill', type: 'Normal Transaction' },
+      { date: '2024-09-19', description: 'Attended a financial planning session with a financial advisor', type: 'Normal Visit' },
+      { date: '2024-09-21', description: 'Invested $10,000 in a mutual fund', type: 'Investment' }
+    ],
+    financialGoals: ['Retirement at 60', 'Children\'s Education'],
+    relationshipManager: 'Sarah Johnson',
+    amount: 1500.00,
+    cards: [
+      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent, 30 days' },
+      { name: 'Red Credit Card', description: '5 transactions, $2000 spent, 30 days' }
+    ],
+    clubs: [
+      { name: 'Forex Club', description: 'Bronze tier, 50K to next tier' },
+      { name: 'Top Trade Club', description: 'Level 3, 500K to next tier' }
+    ]
+  },
+  {
+    id: 2,
+    customerName: 'Jane Smith',
+    customerEmail: 'jane@example.com',
+    phone: '+1 (555) 987-6543',
+    investmentPreference: 'Aggressive',
+    riskTolerance: 'High',
+    gender: 'female',
+    customerAvatar: '/avatars/2.jpg',
+    age: 42,
+    jobTitle: 'Marketing Director',
+    maritalStatus: 'Married',
+    annualIncome: 150000,
+    education: 'Master\'s Degree',
+    interests: ['Fashion', 'Art'],
+    netWorth: 3500000,
+    assets: { stocks: 1500000, bonds: 750000, realEstate: 1250000, cash: 200000, deposit: 180000 },
+    liabilities: { mortgage: 600000 },
+    accountBalance: 275000,
+    realisticGainLoss: 10000,
+    unrealisticGainLoss: 15000,
+    realisticGainLossPercentage: 5,
+    unrealisticGainLossPercentage: 7.5,
+    portfolio: { stocks: 70, bonds: 20, cash: 10 },
+    recentTransactions: [
+      { date: '2023-05-17', description: 'Bond Sale', amount: 10000 },
+      { date: '2023-05-12', description: 'Stock Dividend', amount: 2500 }
+    ],
+    recentActivities: [
+      { date: '2024-09-02', description: 'Investment Activity', type: 'Investment' },
+      { date: '2024-09-04', description: 'Credit Card Purchase', type: 'Normal Transaction' },
+      { date: '2024-09-06', description: 'Branch Visit', type: 'Normal Visit' },
+      { date: '2024-09-08', description: 'Stock Purchase', type: 'Investment' },
+      { date: '2024-09-11', description: 'Debit Card Transaction', type: 'Normal Transaction' },
+      { date: '2024-09-13', description: 'Meeting with RM', type: 'Normal Visit' },
+      { date: '2024-09-15', description: 'Bond Sale', type: 'Investment' },
+      { date: '2024-09-17', description: 'Credit Card Payment', type: 'Normal Transaction' },
+      { date: '2024-09-19', description: 'Financial Planning Session', type: 'Normal Visit' },
+      { date: '2024-09-21', description: 'Mutual Fund Investment', type: 'Investment' }
+    ],
+    financialGoals: ['Early Retirement', 'Start a Business'],
+    relationshipManager: 'Michael Brown',
+    amount: 2750.50,
+    cards: [
+      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent, 30 days' },
+      { name: 'EveryMile Credit Card', description: '5 transactions, $2000 spent, 30 days' }
+    ],
+    clubs: [
+      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier' }
+    ]
+  },
+  {
+    id: 3,
+    customerName: 'Alice Brown',
+    customerEmail: 'alice@example.com',
+    phone: '+1 (555) 234-5678',
+    investmentPreference: 'Conservative',
+    riskTolerance: 'Low',
+    gender: 'female',
+    customerAvatar: '/avatars/3.jpg',
+    age: 55,
+    jobTitle: 'Retired',
+    maritalStatus: 'Married',
+    annualIncome: 150000,
+    education: 'Master\'s Degree',
+    interests: ['Reading', 'Gardening'],
+    netWorth: 1500000,
+    assets: { stocks: 200000, bonds: 300000, realEstate: 500000, cash: 300000, deposit: 180000 },
+    liabilities: { mortgage: 300000 },
+    accountBalance: 120000,
+    realisticGainLoss: 10000,
+    unrealisticGainLoss: 15000,
+    realisticGainLossPercentage: 5,
+    unrealisticGainLossPercentage: 7.5,
+    portfolio: { stocks: 10, bonds: 20, cash: 70 },
+    recentTransactions: [
+      { date: '2023-05-16', description: 'Dividend Payment', amount: 1000 },
+      { date: '2023-05-13', description: 'Interest Payment', amount: 500 }
+    ],
+    recentActivities: [
+      { date: '2024-09-02', description: 'Investment Activity', type: 'Investment' },
+      { date: '2024-09-04', description: 'Credit Card Purchase', type: 'Normal Transaction' },
+      { date: '2024-09-06', description: 'Branch Visit', type: 'Normal Visit' },
+      { date: '2024-09-08', description: 'Stock Purchase', type: 'Investment' },
+      { date: '2024-09-11', description: 'Debit Card Transaction', type: 'Normal Transaction' },
+      { date: '2024-09-13', description: 'Meeting with RM', type: 'Normal Visit' },
+      { date: '2024-09-15', description: 'Bond Sale', type: 'Investment' },
+      { date: '2024-09-17', description: 'Credit Card Payment', type: 'Normal Transaction' },
+      { date: '2024-09-19', description: 'Financial Planning Session', type: 'Normal Visit' },
+      { date: '2024-09-21', description: 'Mutual Fund Investment', type: 'Investment' }
+    ],
+    financialGoals: ['Travel More', 'Donate to Charity'],
+    relationshipManager: 'Emily White',
+    amount: 1200.75,
+    cards: [
+      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent' },
+      { name: 'Red Credit Card', description: '5 transactions, $2000 spent' }
+    ],
+    clubs: [
+      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier' }
+    ]
+  },
+  {
+    id: 4,
+    customerName: 'Sarah Johnson',
+    customerEmail: 'sarah@example.com',
+    phone: '+1 (555) 876-5432',
+    investmentPreference: 'Moderate',
+    riskTolerance: 'Medium',
+    gender: 'female',
+    customerAvatar: '/avatars/4.jpg',
+    age: 48,
+    jobTitle: 'Entrepreneur',
+    maritalStatus: 'Married',
+    annualIncome: 150000,
+    education: 'Master\'s Degree',
+    interests: ['Technology', 'Investing'],
+    netWorth: 4000000,
+    assets: { stocks: 1800000, bonds: 600000, realEstate: 800000, cash: 300000, deposit: 180000 },
+    liabilities: { mortgage: 500000, carLoan: 100000 },
+    accountBalance: 320000,
+    realisticGainLoss: 10000,
+    unrealisticGainLoss: 15000,
+    realisticGainLossPercentage: 5,
+    unrealisticGainLossPercentage: 7.5,
+    portfolio: { stocks: 50, bonds: 30, cash: 20 },
+    recentTransactions: [
+      { date: '2023-05-19', description: 'Stock Purchase', amount: 15000 },
+      { date: '2023-05-11', description: 'Dividend Payment', amount: 1800 }
+    ],
+    recentActivities: [
+      { date: '2024-09-02', description: 'Investment Activity', type: 'Investment' },
+      { date: '2024-09-04', description: 'Credit Card Purchase', type: 'Normal Transaction' },
+      { date: '2024-09-06', description: 'Branch Visit', type: 'Normal Visit' },
+      { date: '2024-09-08', description: 'Stock Purchase', type: 'Investment' },
+      { date: '2024-09-11', description: 'Debit Card Transaction', type: 'Normal Transaction' },
+      { date: '2024-09-13', description: 'Meeting with RM', type: 'Normal Visit' },
+      { date: '2024-09-15', description: 'Bond Sale', type: 'Investment' },
+      { date: '2024-09-17', description: 'Credit Card Payment', type: 'Normal Transaction' },
+      { date: '2024-09-19', description: 'Financial Planning Session', type: 'Normal Visit' },
+      { date: '2024-09-21', description: 'Mutual Fund Investment', type: 'Investment' }
+    ],
+    financialGoals: ['Retirement at 65', 'Buy a Vacation Home'],
+    relationshipManager: 'John Doe',
+    amount: 1800.25,
+    cards: [
+      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent' },
+      { name: 'Red Credit Card', description: '5 transactions, $2000 spent' }
+    ],
+    clubs: [
+      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier' }
+    ]
+  },
+  {
+    id: 5,
+    customerName: 'David Lee',
+    customerEmail: 'david@example.com',
+    phone: '+1 (555) 345-6789',
+    investmentPreference: 'Moderate',
+    riskTolerance: 'Medium',
+    gender: 'male',
+    customerAvatar: '/avatars/5.jpg',
+    age: 39,
+    jobTitle: 'Financial Planner',
+    maritalStatus: 'Married',
+    annualIncome: 150000,
+    education: 'Master\'s Degree',
+    interests: ['Investing', 'Family'],
+    netWorth: 3000000,
+    assets: { stocks: 1200000, bonds: 400000, realEstate: 600000, cash: 300000, deposit: 90000 },
+    liabilities: { mortgage: 400000, carLoan: 50000 },
+    accountBalance: 250000,
+    realisticGainLoss: 10000,
+    unrealisticGainLoss: 15000,
+    realisticGainLossPercentage: 5,
+    unrealisticGainLossPercentage: 7.5,
+    portfolio: { stocks: 40, bonds: 30, cash: 30 },
+    recentTransactions: [
+      { date: '2023-05-20', description: 'Stock Purchase', amount: 12000 },
+      { date: '2023-05-12', description: 'Dividend Payment', amount: 1500 }
+    ],
+    recentActivities: [
+      { date: '2024-09-02', description: 'Investment Activity', type: 'Investment' },
+      { date: '2024-09-04', description: 'Credit Card Purchase', type: 'Normal Transaction' },
+      { date: '2024-09-06', description: 'Branch Visit', type: 'Normal Visit' },
+      { date: '2024-09-08', description: 'Stock Purchase', type: 'Investment' },
+      { date: '2024-09-11', description: 'Debit Card Transaction', type: 'Normal Transaction' },
+      { date: '2024-09-13', description: 'Meeting with RM', type: 'Normal Visit' },
+      { date: '2024-09-15', description: 'Bond Sale', type: 'Investment' },
+      { date: '2024-09-17', description: 'Credit Card Payment', type: 'Normal Transaction' },
+      { date: '2024-09-19', description: 'Financial Planning Session', type: 'Normal Visit' },
+      { date: '2024-09-21', description: 'Mutual Fund Investment', type: 'Investment' }
+    ],
+    financialGoals: ['Retirement at 65', 'Buy a Vacation Home'],
+    relationshipManager: 'David Lee',
+    amount: 1500.00,
+    cards: [
+      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent' },
+      { name: 'Red Credit Card', description: '5 transactions, $2000 spent' }
+    ],
+    clubs: [
+      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier' }
+    ]
+  },
+]
 
 export default function Dashboard() {
   const [stats, setStats] = useState<OverviewStats | null>(null);
@@ -89,8 +339,6 @@ export default function Dashboard() {
   const [marketInsights, setMarketInsights] = useState<MarketInsight[]>([]);
   const [alerts, setAlerts] = useState<Alert[]>([]);
 
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
   const [startDateRange, endDateRange] = dateRange;
   const [activeTab, setActiveTab] = useState('Overview');

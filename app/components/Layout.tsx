@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const menuItems = [
     { path: '/home', icon: FaHome, label: 'Home' },
     { path: '/dashboard', icon: FaTachometerAlt, label: 'Dashboard' },
-    { path: '/contacts', icon: FaAddressBook, label: 'Cliens' },
+    { path: '/contacts', icon: FaAddressBook, label: 'Clients' },
     { path: '/calendar', icon: FaCalendar, label: 'Calendar' },
     { path: '/settings', icon: FaCog, label: 'Settings' },
   ];

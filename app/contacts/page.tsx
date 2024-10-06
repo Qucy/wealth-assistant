@@ -13,8 +13,8 @@ export default function Contacts() {
     <Layout>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-semibold mb-6 text-gray-900">Client Contacts</h1>
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
+        <div className="bg-white shadow-md rounded-lg overflow-hidden w-full">
+          <table className="w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
