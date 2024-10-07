@@ -117,12 +117,14 @@ const recentSales = [
     relationshipManager: 'Sarah Johnson',
     amount: 1500.00,
     cards: [
-      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent, 30 days' },
-      { name: 'Red Credit Card', description: '5 transactions, $2000 spent, 30 days' }
+      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent, 30 days', type: 'hold' },
+      { name: 'Red Credit Card', description: '5 transactions, $2000 spent, 30 days', type: 'hold' },
+      { name: 'EveryMile Credit Card', description: 'Recommended for frequent travelers', type: 'unhold' }
     ],
     clubs: [
-      { name: 'Forex Club', description: 'Bronze tier, 50K to next tier' },
-      { name: 'Top Trade Club', description: 'Level 3, 500K to next tier' }
+      { name: 'Forex Club', description: 'Bronze tier, 50K to next tier', type: 'enrolled'},
+      { name: 'Top Trade Club', description: 'Level 3, 500K to next tier', type: 'enrolled' },
+      { name: 'Travel Hub', description: 'Recommended for frequent travelers', type: 'not enrolled'},
     ]
   },
   {
@@ -169,11 +171,11 @@ const recentSales = [
     relationshipManager: 'Michael Brown',
     amount: 2750.50,
     cards: [
-      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent, 30 days' },
-      { name: 'EveryMile Credit Card', description: '5 transactions, $2000 spent, 30 days' }
+      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent, 30 days', type: 'hold' },
+      { name: 'EveryMile Credit Card', description: '5 transactions, $2000 spent, 30 days', type: 'hold' }
     ],
     clubs: [
-      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier' }
+      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier', type: 'enrolled' }
     ]
   },
   {
@@ -220,11 +222,11 @@ const recentSales = [
     relationshipManager: 'Emily White',
     amount: 1200.75,
     cards: [
-      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent' },
-      { name: 'Red Credit Card', description: '5 transactions, $2000 spent' }
+      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent, 30 days', type: 'hold' },
+      { name: 'EveryMile Credit Card', description: '5 transactions, $2000 spent, 30 days', type: 'hold' }
     ],
     clubs: [
-      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier' }
+      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier', type: 'enrolled' }
     ]
   },
   {
@@ -268,14 +270,14 @@ const recentSales = [
       { date: '2024-09-21', description: 'Mutual Fund Investment', type: 'Investment' }
     ],
     financialGoals: ['Retirement at 65', 'Buy a Vacation Home'],
-    relationshipManager: 'John Doe',
+    relationshipManager: 'Josh Yang',
     amount: 1800.25,
     cards: [
-      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent' },
-      { name: 'Red Credit Card', description: '5 transactions, $2000 spent' }
+      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent, 30 days', type: 'hold' },
+      { name: 'EveryMile Credit Card', description: '5 transactions, $2000 spent, 30 days', type: 'hold' }
     ],
     clubs: [
-      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier' }
+      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier', type: 'enrolled' }
     ]
   },
   {
@@ -322,23 +324,17 @@ const recentSales = [
     relationshipManager: 'David Lee',
     amount: 1500.00,
     cards: [
-      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent' },
-      { name: 'Red Credit Card', description: '5 transactions, $2000 spent' }
+      { name: 'Mastercard Debit Card', description: '10 transactions, $5000 spent, 30 days', type: 'hold' },
+      { name: 'EveryMile Credit Card', description: '5 transactions, $2000 spent, 30 days', type: 'hold' }
     ],
     clubs: [
-      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier' }
+      { name: 'Travel Hub', description: 'Silver, 2 more ticket or hotel bookings to next tier', type: 'enrolled' }
     ]
   },
 ]
 
 export default function Dashboard() {
   const [stats, setStats] = useState<OverviewStats | null>(null);
-  const [topClients, setTopClients] = useState<Client[]>([]);
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [recentActivities, setRecentActivities] = useState<Activity[]>([]);
-  const [marketInsights, setMarketInsights] = useState<MarketInsight[]>([]);
-  const [alerts, setAlerts] = useState<Alert[]>([]);
-
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
   const [startDateRange, endDateRange] = dateRange;
   const [activeTab, setActiveTab] = useState('Overview');
@@ -387,35 +383,12 @@ export default function Dashboard() {
         { date: '2024-12-01', value: 8.5 },
       ],
     });
-    setTopClients([
-      { id: 1, name: 'John Doe', portfolioValue: 50000000, recentChange: 2.3 },
-      { id: 2, name: 'Jane Smith', portfolioValue: 45000000, recentChange: -1.1 },
-      { id: 3, name: 'Bob Johnson', portfolioValue: 40000000, recentChange: 3.7 },
-    ]);
-    setTasks([
-      { id: 1, title: 'Client meeting with John Doe', dueDate: '2024-03-15' },
-      { id: 2, title: 'Portfolio review for Jane Smith', dueDate: '2024-03-18' },
-    ]);
-    setRecentActivities([
-      { id: 1, description: 'Updated portfolio for Bob Johnson', date: '2024-03-10' },
-      { id: 2, description: 'New client onboarding: Alice Brown', date: '2024-03-09' },
-    ]);
-    setMarketInsights([
-      { id: 1, title: 'S&P 500', change: 0.5 },
-      { id: 2, title: 'NASDAQ', change: -0.3 },
-      { id: 3, title: 'DJIA', change: 0.2 },
-    ]);
-    setAlerts([
-      { id: 1, type: 'compliance', message: 'Annual review due for 5 clients' },
-      { id: 2, type: 'risk', message: 'High market volatility detected' },
-    ]);
   }, []);
 
   if (!stats) return <div className="w-screen h-screen flex items-center justify-center text-gray-700">Loading...</div>;
 
   return (
     <Layout>
-
       {/* Dashboard title and date range picker */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
         {/* Add Dashboard title */}
@@ -471,7 +444,6 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
-
 
       <OverviewStats stats={stats} />
 

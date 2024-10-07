@@ -103,7 +103,7 @@ export default function OverviewStats({ stats }: OverviewStatsProps) {
         <FaUsers className="text-gray-400 absolute top-6 right-6" />
         <h3 className="text-base font-semibold text-gray-700 mb-2">Client Count</h3>
         <p className="text-2xl font-bold text-gray-900">{stats.clientCount}</p>
-        <p className="text-sm text-gray-500">5 new clients this week</p>
+        <p className="text-sm text-gray-500">2 new clients this week</p>
       </div>
       <div className="bg-white p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 flex flex-col border border-gray-200 relative">
         <FaChartLine className="text-gray-400 absolute top-6 right-6" />

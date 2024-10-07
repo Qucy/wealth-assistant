@@ -23,7 +23,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   ];
 
   // Hardcoded user name for demonstration
-  const userName = "John Doe";
+  const userName = "Josh Wang";
 
   if (!mounted) {
     return null;
@@ -36,7 +36,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center flex-grow">
             <div className="flex items-center bg-white border border-gray-300 rounded-full px-4 py-2 mr-4">
-              <FaUser className="text-gray-500 mr-2" />
+              <img src="/avatars/6.jpg" alt="Josh Wang" className="w-8 h-8 rounded-full mr-2" />
               <span className="font-semibold mr-2 text-black">{userName}</span>
               <Link 
                 href="/" 

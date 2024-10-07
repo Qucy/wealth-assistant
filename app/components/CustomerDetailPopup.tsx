@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { FaBriefcase, FaHeart, FaBirthdayCake, FaRing, FaDollarSign, FaGraduationCap, FaLinkedin, FaTwitter, FaCalculator, FaUser, FaPhone, FaEnvelope} from 'react-icons/fa';
+import { FaBriefcase, FaHeart, FaBirthdayCake, FaRing, FaDollarSign, FaGraduationCap, FaLinkedin, FaTwitter, FaCalculator, FaUser, FaPhone, FaEnvelope, FaTimes, FaStar} from 'react-icons/fa';
 import { PieChart, Pie, Cell, Tooltip, Text} from 'recharts';
 
 interface CustomerDetailPopupProps {
@@ -28,8 +28,8 @@ interface CustomerDetailPopupProps {
         recentActivities: { date: string; type: string; description: string }[];
         financialGoals: string[];
         relationshipManager: string;
-        cards: { name: string, description: string }[];
-        clubs: { name: string, description: string }[];
+        cards: { name: string, description: string, type: string}[];
+        clubs: { name: string, description: string, type: string}[];
         // Enhanced data structure for gain and loss
         realisticGainLoss: number;
         unrealisticGainLoss: number;
@@ -111,10 +111,11 @@ export default function CustomerDetailPopup({ customer, onClose }: CustomerDetai
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
-            <div ref={popupRef} className="bg-white rounded-xl shadow-lg p-6 border border-gray-200 w-11/12 m-4 max-h-[90vh] overflow-y-auto text-black"> {/* Changed width to 90% */}
+            <div ref={popupRef} className="bg-white rounded-xl shadow-lg p-4 border border-gray-200 w-11/12 m-4 max-h-[90vh] overflow-y-auto text-black"> {/* Changed width to 90% and reduced padding */}
                 {/* Header Section */}
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-2"> {/* Reduced bottom margin */}
                     <h1 className="text-2xl font-semibold">Customer Profile</h1>
+                    <FaTimes className="cursor-pointer text-gray-600 hover:text-gray-800" onClick={onClose} /> {/* Close icon */}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -135,7 +136,17 @@ export default function CustomerDetailPopup({ customer, onClose }: CustomerDetai
                                     <p className="text-sm text-gray-500">Premium Customer</p>
                                     <p className="text-sm text-gray-500">RM: {customer.relationshipManager}</p>
                                 </div>
+                                {/* RM Advice Box */}
+                                <div className="bg-gray-100 p-4 rounded-lg w-2/3 ml-6">
+                                    <div className="flex items-start">
+                                        <FaStar className="text-yellow-500 mr-2" />
+                                        <p className="text-sm text-gray-600">
+                                            John Doe should maximize contributions to tax-advantaged retirement accounts, leveraging compound growth for early retirement by age 60.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
+
                             <div className="grid grid-cols-3 gap-4">
                                 <div className="flex items-center">
                                     <FaBirthdayCake className="mr-2" />
@@ -246,7 +257,7 @@ export default function CustomerDetailPopup({ customer, onClose }: CustomerDetai
                                     </div>
 
                                     {/* Investment Portfolio Breakdown */}
-                                    <div className="flex-1 border border-gray-200 rounded-lg p-1 flex flex-col"> {/* Changed padding from p-2 to p-1 */}
+                                    <div className="flex-1 border border-gray-200 rounded-lg p-1 flex flex-col relative"> {/* Adjusted height by using minHeight */}
                                         <div className="flex justify-between items-center mb-2"> {/* Added flex container for icon and title */}
                                             <h4 className="font-medium text-sm">Investment Portfolio</h4>
                                             <FaBriefcase className="text-gray-400" title="show investment portfolio detail" /> {/* Added icon for Investment Portfolio */}
@@ -398,9 +409,8 @@ export default function CustomerDetailPopup({ customer, onClose }: CustomerDetai
                                         <p className="text-sm text-gray-600">
                                             ({customer.realisticGainLossPercentage?.toFixed(2) || '0.00'}%)
                                         </p>
-                                        <p className="text-xs text-gray-500">This reflects the actual market performance of the assets.</p>
+                                        <p className="text-xs text-gray-500">Reflects a solid market performance, indicating a positive trend in investment returns.</p>
                                     </div>
-
                                     {/* Unrealistic Gain & Loss Card */}
                                     <div className="bg-red-100 border border-red-300 rounded-lg p-4">
                                         <h4 className="font-medium text-sm">Unrealistic Gain & Loss</h4>
@@ -410,7 +420,7 @@ export default function CustomerDetailPopup({ customer, onClose }: CustomerDetai
                                         <p className="text-sm text-gray-600">
                                             ({customer.unrealisticGainLossPercentage?.toFixed(2) || '0.00'}%)
                                         </p>
-                                        <p className="text-xs text-gray-500">This includes potential gains/losses based on projections.</p>
+                                        <p className="text-xs text-gray-500">Suggests a high-risk investment strategy that may not be sustainable in the long term.</p>
                                     </div>
                                 </div>
                             </div>
@@ -419,19 +429,21 @@ export default function CustomerDetailPopup({ customer, onClose }: CustomerDetai
                     {/* Right Column */}
                     <div>
                         {/* Cards Holding Section */}
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 relative mb-6"> {/* Added mb-6 for bottom margin */}
-                            <h3 className="text-lg font-semibold absolute -top-4 left-4 bg-white px-2 z-10">Cards Holding</h3> {/* Title for Cards Holding */}
+                        <div className="bg-white p-4 rounded-lg border text-gray-600 relative mb-6"> {/* Added mb-6 for bottom margin */}
+                            <h3 className="text-lg font-semibold absolute -top-4 left-4 bg-white px-2 z-10">Card Holdings & Recommendations</h3> {/* Title for Card Holdings */}
                             {customer.cards && customer.cards.length > 0 ? ( // Check if cards exist
                                 <div className="flex flex-wrap gap-4"> {/* Added flex container for horizontal layout */}
                                     {customer.cards.map((card, index) => (
-                                        <div key={index} className="flex flex-col items-center border border-gray-300 p-2 rounded-lg">
+                                        <div key={index} className={`flex flex-col items-center border border-gray-300 p-2 rounded-lg relative ${card.type === 'unhold' ? 'bg-gray-100' : ''}`}> {/* Change background color for unhold cards */}
                                             <img 
                                                 src={cardImages[card.name as keyof typeof cardImages] || '/cards/cards1.png'} // Use default image if not found
                                                 alt={card.name}
                                                 className="w-24 h-14 mb-2" // Adjust size as needed
                                             />
-                                            <p className="text-sm font-semibold">{card.name}</p> {/* Display card name directly */}
-                                            <p className="text-xs text-gray-500">{card.description}</p> {/* Display card description in gray text */}
+                                            <p className="text-sm font-semibold">{card.name}{card.type === 'unhold' ? ' (unhold)' : ''}</p> {/* Display card name directly */}
+                                            <p className="text-xs text-gray-500 flex items-center">
+                                                {card.type === 'unhold' ? <><FaStar className="text-yellow-500 mr-1" style={{ marginTop: '-2px' }} /></> : null}{card.description}
+                                            </p>
                                         </div>
                                     ))}
                                 </div>
@@ -441,20 +453,22 @@ export default function CustomerDetailPopup({ customer, onClose }: CustomerDetai
                         </div>
 
                         {/* Clubs Joined Section */}
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 relative mb-6"> {/* Added mb-6 for bottom margin */}
-                            <h3 className="text-lg font-semibold absolute -top-4 left-4 bg-white px-2 z-10">Clubs Joined</h3> {/* Title for Clubs Holding */}
+                        <div className="bg-white p-4 rounded-lg border text-gray-600 relative mb-6"> {/* Added mb-6 for bottom margin */}
+                            <h3 className="text-lg font-semibold absolute -top-4 left-4 bg-white px-2 z-10">Clubs Joined & Recommendations</h3> {/* Title for Clubs Holding */}
                             {customer.clubs && customer.clubs.length > 0 ? ( // Check if clubs exist
                                 <div className="flex flex-wrap gap-4"> {/* Added flex container for horizontal layout */}
                                     {customer.clubs.map((club, index) => (
-                                        <div key={index} className="flex items-center border border-gray-300 p-2 rounded-lg">
+                                        <div key={index} className={`flex items-center border border-gray-300 p-2 rounded-lg ${club.type === 'enrolled' ? '' : 'bg-gray-100'}`}> {/* Change background color based on enrollment status */}
                                             <img 
                                                 src={clubImages[club.name as keyof typeof clubImages] || '/clubs/forexclub.jpg'} // Use default image if not found
                                                 alt={club.name}
                                                 className="w-18 h-14 mr-2" // Adjust size as needed
                                             />
                                             <div>
-                                                <p className="text-sm font-semibold">{club.name}</p> {/* Display club name directly */}
-                                                <p className="text-xs text-gray-500">{club.description}</p> {/* Display club description */}
+                                                <p className="text-sm font-semibold">{club.name}{club.type === 'not enrolled' ? ' (not enrolled)' : ''}</p> {/* Display club name directly */}
+                                                <p className="text-xs text-gray-500 flex items-center">
+                                                    {club.type === 'not enrolled' ? <><FaStar className="text-yellow-500 mr-1" style={{ marginTop: '-2px' }} /></> : null}{club.description}
+                                                </p>
                                             </div>
                                         </div>
                                     ))}
