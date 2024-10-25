@@ -28,37 +28,6 @@ interface OverviewStats {
   historicalYTDPerformance: { date: string; value: number }[];
 }
 
-interface Client {
-  id: number;
-  name: string;
-  portfolioValue: number;
-  recentChange: number;
-}
-
-interface Task {
-  id: number;
-  title: string;
-  dueDate: string;
-}
-
-interface Activity {
-  id: number;
-  description: string;
-  date: string;
-}
-
-interface MarketInsight {
-  id: number;
-  title: string;
-  change: number;
-}
-
-interface Alert {
-  id: number;
-  type: 'compliance' | 'risk';
-  message: string;
-}
-
 // Dummy data for monthlyData
 const monthlyData = [
   { month: 'Jan', gain: 50000, loss: 20000 },
@@ -97,6 +66,7 @@ const recentSales = [
     unrealisticGainLoss: 15000,
     realisticGainLossPercentage: 5,
     unrealisticGainLossPercentage: 7.5,
+    portfolio: { stocks: 70, bonds: 20, cash: 10 },
     recentTransactions: [
       { date: '2024-05-15', description: 'Stock Purchase', amount: 5000 },
       { date: '2024-05-10', description: 'Dividend Payment', amount: 1200 }
@@ -144,7 +114,7 @@ const recentSales = [
     interests: ['Fashion', 'Art'],
     netWorth: 3500000,
     assets: { stocks: 1500000, bonds: 750000, realEstate: 1250000, cash: 200000, deposit: 180000 },
-    liabilities: { mortgage: 600000 },
+    liabilities: { mortgage: 600000, carLoan:20000 },
     accountBalance: 275000,
     realisticGainLoss: 10000,
     unrealisticGainLoss: 15000,
@@ -195,7 +165,7 @@ const recentSales = [
     interests: ['Reading', 'Gardening'],
     netWorth: 1500000,
     assets: { stocks: 200000, bonds: 300000, realEstate: 500000, cash: 300000, deposit: 180000 },
-    liabilities: { mortgage: 300000 },
+    liabilities: { mortgage: 300000, carLoan: 20000 },
     accountBalance: 120000,
     realisticGainLoss: 10000,
     unrealisticGainLoss: 15000,

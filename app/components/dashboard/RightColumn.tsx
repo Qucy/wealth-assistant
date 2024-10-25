@@ -10,7 +10,6 @@ interface Sale {
     maritalStatus: string;
     annualIncome: number;
     education: string;
-    totalAssets: number;
     investmentPreference: string;
     riskTolerance: string;
     gender: string;
@@ -24,12 +23,16 @@ interface Sale {
     accountBalance: number;
     portfolio: { [key: string]: number };
     recentTransactions: { date: string; description: string; amount: number }[];
-    recentActivities: { date: string; description: string }[];
+    recentActivities: { date: string; type: string; description: string }[];
     financialGoals: string[];
     relationshipManager: string;
     amount: number; // Keep this if it's still needed in the RightColumn component
-    cards: { name: string, description: string }[];
-    clubs: { name: string, description: string }[];
+    cards: { name: string, description: string, type: string}[];
+    clubs: { name: string, description: string, type: string}[];
+    realisticGainLoss: number; // Added property
+    unrealisticGainLoss: number; // Added property
+    realisticGainLossPercentage: number; // Added property
+    unrealisticGainLossPercentage: number; // Added property
 }
 
 interface RightColumnProps {

@@ -11,7 +11,6 @@ interface CustomerDetailPopupProps {
         annualIncome: number;
         education: string;
         phone: string;
-        totalAssets: number;
         investmentPreference: string;
         riskTolerance: string;
         gender: string;
